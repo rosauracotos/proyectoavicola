@@ -8,5 +8,7 @@ public interface ProductoServicio {
 
     public List<Producto> obtenerProducto();
     public Producto buscarPorId (Long id);
+    public  Producto crearProducto (Producto producto);
+    public Producto modificarProducto (Long id, Producto producto);
     public Producto eliminarProducto(Long id);
 }

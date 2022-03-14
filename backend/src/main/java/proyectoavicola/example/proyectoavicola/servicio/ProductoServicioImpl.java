@@ -24,6 +24,18 @@ public class ProductoServicioImpl implements ProductoServicio{
     }
 
     @Override
+    public Producto crearProducto(Producto producto) {
+        return productoRepositorio.save(producto);
+    }
+
+    @Override
+    public Producto modificarProducto(Long id, Producto producto) {
+        Producto productoActualizar = buscarPorId(id);
+        productoActualizar = productoRepositorio.save(producto);
+        return productoActualizar;
+    }
+
+    @Override
     public Producto eliminarProducto(Long id) {
         Producto producto = buscarPorId(id);
         productoRepositorio.delete(producto);
