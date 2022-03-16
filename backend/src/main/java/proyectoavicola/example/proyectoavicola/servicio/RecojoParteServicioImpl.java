@@ -2,10 +2,15 @@ package proyectoavicola.example.proyectoavicola.servicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import proyectoavicola.example.proyectoavicola.dto.RecojoDetalleDTO;
 import proyectoavicola.example.proyectoavicola.dto.RecojoProductos;
+import proyectoavicola.example.proyectoavicola.entidad.ParteProduccion;
 import proyectoavicola.example.proyectoavicola.entidad.RecojoParte;
+import proyectoavicola.example.proyectoavicola.repositorio.ParteProduccionRepositorio;
 import proyectoavicola.example.proyectoavicola.repositorio.RecojoParteRepositorio;
+import proyectoavicola.example.proyectoavicola.util.AvicolaUtil;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -14,6 +19,8 @@ public class RecojoParteServicioImpl  implements RecojoParteServicio{
     @Autowired
     private RecojoParteRepositorio recojoParteRepositorio;
 
+    @Autowired
+    private ParteProduccionRepositorio parteProduccionRepositorio;
 
     @Override
     public List<RecojoParte> obtenerRecojoParte() {
@@ -27,27 +34,58 @@ public class RecojoParteServicioImpl  implements RecojoParteServicio{
 
     @Override
     public RecojoParte crearRecojoParte(RecojoParte recojoParte) {
-        recojoParte.setMoneda("1");
-        recojoParte.setEmpresa("10");
-        recojoParte.setOperacion("91");
-        recojoParte.setEstado(Boolean.FALSE);
-        return recojoParteRepositorio.save(recojoParte);
+        return null;
     }
 
     @Override
     public RecojoParte crearRecojoParteDesdeDTO(RecojoProductos recojoProductosDTO) {
+        String ultimoCodigoParte = recojoParteRepositorio.obtenerUltimoRegistro().getParteCod();
+        Integer codigoActual = AvicolaUtil.convertirStringANumero(ultimoCodigoParte);
+        String codigoNuevo = AvicolaUtil.obtenerSiguienteCodigo(codigoActual);
         RecojoParte recojoParte = new RecojoParte();
+        RecojoParte recojoParteNuevo = new RecojoParte();
+
         // Valores por Defecto
         recojoParte.setMoneda("1");
         recojoParte.setEmpresa("10");
         recojoParte.setOperacion("91");
-        recojoParte.setEstado(Boolean.FALSE);
+        recojoParte.setParteAnulado(Boolean.FALSE);
         recojoParte.setObservacion("");
+        // Valores Auditoria
+        recojoParte.setNumParte("");
+        recojoParte.setFechaInsert(recojoProductosDTO.getFecha());
+        recojoParte.setPcInsert("");
+        recojoParte.setUserInsert("");
         // Tomar valores DTO
-        recojoParte.setAlmacen(recojoProductosDTO.getCodigoAlmacen());
+        recojoParte.setAlmacenCod(recojoProductosDTO.getCodigoAlmacen());
         recojoParte.setFecha(recojoProductosDTO.getFecha());
+        recojoParte.setParteCod(codigoNuevo);
+        recojoParteNuevo = recojoParteRepositorio.save(recojoParte);
+        guardarRecojoParteDetalleDTO(recojoProductosDTO.getDetalles());
+        return recojoParteNuevo;
+    }
 
-        return recojoParteRepositorio.save(recojoParte);
+    @Override
+    public void guardarRecojoParteDetalleDTO(List<RecojoDetalleDTO> listaRecojoDetalleDTO){
+
+        for (RecojoDetalleDTO recojoDetalleDTO : listaRecojoDetalleDTO) {
+            String ultimoCodigoParteProd = parteProduccionRepositorio.obtenerUltimoRegistro().getCodigo();
+            Integer codigoActual = AvicolaUtil.convertirStringANumero(ultimoCodigoParteProd);
+            String codigoNuevo = AvicolaUtil.obtenerSiguienteCodigo(codigoActual);
+            ParteProduccion  parteProduccion = new ParteProduccion();
+            //VALORES POR DEFECTO
+            parteProduccion.setCantEquiv(recojoDetalleDTO.getCantidad());
+            parteProduccion.setUnimedCod("01");
+            parteProduccion.setParprodCant(recojoDetalleDTO.getCantidad());
+            parteProduccion.setProdCod(recojoDetalleDTO.getCodProducto());
+            //VALORES POR DEFINIR
+            parteProduccion.setParprodIten("");
+            parteProduccion.setParprodPrecio(new BigDecimal(0.00));
+            parteProduccion.setParprodTotal(new BigDecimal(0.00));
+            parteProduccion.setStock(new BigDecimal(0.00));
+            parteProduccion.setCodigo(codigoNuevo);
+            parteProduccionRepositorio.save(parteProduccion);
+        }
     }
 
     @Override

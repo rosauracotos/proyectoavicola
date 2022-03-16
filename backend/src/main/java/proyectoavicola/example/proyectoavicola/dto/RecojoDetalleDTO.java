@@ -1,11 +1,13 @@
 package proyectoavicola.example.proyectoavicola.dto;
 
 
+import java.math.BigDecimal;
+
 public class RecojoDetalleDTO {
 
     private String codProducto;
 
-    private int cantidad;
+    private BigDecimal cantidad;
 
     public RecojoDetalleDTO() {
     }
@@ -18,11 +20,12 @@ public class RecojoDetalleDTO {
         this.codProducto = codProducto;
     }
 
-    public int getCantidad() {
+    public BigDecimal getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(BigDecimal cantidad) {
         this.cantidad = cantidad;
     }
+
 }

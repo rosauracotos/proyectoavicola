@@ -15,13 +15,13 @@ public class RecojoParte {
 
     @Id
     @Column(name = "parte_cod", nullable = false)
-    private String codigo;
+    private String parteCod;
 
     @Column(name = "emp_cod")
     private String empresa;
 
     @Column(name = "alma_cod")
-    private String almacen;
+    private String almacenCod;
 
     @Column(name = "parte_fecha")
     private Calendar fecha;
@@ -30,7 +30,7 @@ public class RecojoParte {
     private String operacion;
 
     @Column(name = "parte_anulado")
-    private Boolean estado;
+    private Boolean parteAnulado;
 
     @Column(name = "moneda_cod")
     private String moneda;
@@ -38,12 +38,24 @@ public class RecojoParte {
     @Column(name = "parte_obs")
     private String observacion;
 
-    public String getCodigo() {
-        return codigo;
+    @Column(name = "fecha_insert")
+    private Calendar fechaInsert;
+
+    @Column(name = "pc_insert")
+    private String pcInsert;
+
+    @Column(name = "num_parte")
+    private String numParte;
+
+    @Column(name = "user_insert")
+    private String userInsert;
+
+    public String getParteCod() {
+        return parteCod;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setParteCod(String parteCod) {
+        this.parteCod = parteCod;
     }
 
     public String getEmpresa() {
@@ -54,12 +66,12 @@ public class RecojoParte {
         this.empresa = empresa;
     }
 
-    public String getAlmacen() {
-        return almacen;
+    public String getAlmacenCod() {
+        return almacenCod;
     }
 
-    public void setAlmacen(String almacen) {
-        this.almacen = almacen;
+    public void setAlmacenCod(String almacenCod) {
+        this.almacenCod = almacenCod;
     }
 
     public Calendar getFecha() {
@@ -78,12 +90,12 @@ public class RecojoParte {
         this.operacion = operacion;
     }
 
-    public Boolean getEstado() {
-        return estado;
+    public Boolean getParteAnulado() {
+        return parteAnulado;
     }
 
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
+    public void setParteAnulado(Boolean parteAnulado) {
+        this.parteAnulado = parteAnulado;
     }
 
     public String getMoneda() {
@@ -100,5 +112,37 @@ public class RecojoParte {
 
     public void setObservacion(String observacion) {
         this.observacion = observacion;
+    }
+
+    public Calendar getFechaInsert() {
+        return fechaInsert;
+    }
+
+    public void setFechaInsert(Calendar fechaInsert) {
+        this.fechaInsert = fechaInsert;
+    }
+
+    public String getPcInsert() {
+        return pcInsert;
+    }
+
+    public void setPcInsert(String pcInsert) {
+        this.pcInsert = pcInsert;
+    }
+
+    public String getNumParte() {
+        return numParte;
+    }
+
+    public void setNumParte(String numParte) {
+        this.numParte = numParte;
+    }
+
+    public String getUserInsert() {
+        return userInsert;
+    }
+
+    public void setUserInsert(String userInsert) {
+        this.userInsert = userInsert;
     }
 }
