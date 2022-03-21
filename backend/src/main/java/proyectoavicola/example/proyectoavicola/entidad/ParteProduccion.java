@@ -16,7 +16,7 @@ public class ParteProduccion {
     private String codigo;
 
     @Column(name = "parprod_item")
-    private String parprodIten;
+    private String parprodItem;
 
     @Column(name = "parprod_cant")
     private BigDecimal parprodCant;
@@ -47,12 +47,12 @@ public class ParteProduccion {
         this.codigo = codigo;
     }
 
-    public String getParprodIten() {
-        return parprodIten;
+    public String getParprodItem() {
+        return parprodItem;
     }
 
-    public void setParprodIten(String parprodIten) {
-        this.parprodIten = parprodIten;
+    public void setParprodItem(String parprodItem) {
+        this.parprodItem = parprodItem;
     }
 
     public BigDecimal getParprodCant() {

@@ -61,30 +61,30 @@ public class RecojoParteServicioImpl  implements RecojoParteServicio{
         recojoParte.setFecha(recojoProductosDTO.getFecha());
         recojoParte.setParteCod(codigoNuevo);
         recojoParteNuevo = recojoParteRepositorio.save(recojoParte);
-        guardarRecojoParteDetalleDTO(recojoProductosDTO.getDetalles());
+        guardarRecojoParteDetalleDTO(recojoProductosDTO.getDetalles(), recojoParte.getParteCod());
         return recojoParteNuevo;
     }
 
     @Override
-    public void guardarRecojoParteDetalleDTO(List<RecojoDetalleDTO> listaRecojoDetalleDTO){
+    public void guardarRecojoParteDetalleDTO(List<RecojoDetalleDTO> listaRecojoDetalleDTO, String parteCod){
 
+        int orden = 1;
         for (RecojoDetalleDTO recojoDetalleDTO : listaRecojoDetalleDTO) {
-            String ultimoCodigoParteProd = parteProduccionRepositorio.obtenerUltimoRegistro().getCodigo();
-            Integer codigoActual = AvicolaUtil.convertirStringANumero(ultimoCodigoParteProd);
-            String codigoNuevo = AvicolaUtil.obtenerSiguienteCodigo(codigoActual);
+
             ParteProduccion  parteProduccion = new ParteProduccion();
             //VALORES POR DEFECTO
             parteProduccion.setCantEquiv(recojoDetalleDTO.getCantidad());
             parteProduccion.setUnimedCod("01");
+            parteProduccion.setParprodItem(AvicolaUtil.completarNumeroConCeros(3, orden));
             parteProduccion.setParprodCant(recojoDetalleDTO.getCantidad());
             parteProduccion.setProdCod(recojoDetalleDTO.getCodProducto());
             //VALORES POR DEFINIR
-            parteProduccion.setParprodIten("");
             parteProduccion.setParprodPrecio(new BigDecimal(0.00));
             parteProduccion.setParprodTotal(new BigDecimal(0.00));
             parteProduccion.setStock(new BigDecimal(0.00));
-            parteProduccion.setCodigo(codigoNuevo);
+            parteProduccion.setCodigo(parteCod);
             parteProduccionRepositorio.save(parteProduccion);
+            orden++;
         }
     }
 

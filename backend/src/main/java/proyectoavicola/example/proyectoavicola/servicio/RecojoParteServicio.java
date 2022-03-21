@@ -17,7 +17,7 @@ public interface RecojoParteServicio {
 
     public RecojoParte crearRecojoParteDesdeDTO(RecojoProductos recojoProductosDTO);
 
-    public void guardarRecojoParteDetalleDTO(List<RecojoDetalleDTO> listaRecojoDetalleDTO);
+    public void guardarRecojoParteDetalleDTO(List<RecojoDetalleDTO> listaRecojoDetalleDTO, String parteCod);
 
     public RecojoParte modificarRecojoParte (Long id, RecojoParte recojoParte);
 

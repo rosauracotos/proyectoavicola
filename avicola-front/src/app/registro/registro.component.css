@@ -1,12 +1,17 @@
 .tabla-detalles{
   width: 90%;
   margin: 0 auto;
+  max-width: 600px;
 }
 .contenedor{
   width: 90%;
   margin: 0 auto;
+  max-width: 500px;
 }
 
-.contenedor mat-form-field, .contenedor button{
+.contenedor mat-form-field{
   width: 100%;
+}
+.contenedor button{
+  width: 40%;
 }
