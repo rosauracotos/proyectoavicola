@@ -1,0 +1,12 @@
+.tabla-detalles{
+  width: 90%;
+  margin: 0 auto;
+}
+.contenedor{
+  width: 90%;
+  margin: 0 auto;
+}
+
+.contenedor mat-form-field, .contenedor button{
+  width: 100%;
+}
