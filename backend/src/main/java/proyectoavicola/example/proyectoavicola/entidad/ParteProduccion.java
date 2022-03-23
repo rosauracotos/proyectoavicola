@@ -4,17 +4,20 @@ package proyectoavicola.example.proyectoavicola.entidad;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "PARTE_PRODUCCION")
+@IdClass(ClassId.class)
 public class ParteProduccion {
 
     @Id
     @Column(name = "parte_cod")
     private String codigo;
 
+    @Id
     @Column(name = "parprod_item")
     private String parprodItem;
 

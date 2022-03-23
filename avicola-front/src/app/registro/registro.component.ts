@@ -6,6 +6,7 @@ import {ParteDetalle} from "../interfaces/ParteDetalle";
 import {MatTableDataSource} from "@angular/material/table";
 import {ParteCabeceraVM} from "../view-models/ParteCabeceraVM";
 import {RecojoService} from "../servicios/recojo.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro',
@@ -139,15 +140,29 @@ export class RegistroComponent implements OnInit {
         codProducto: item.producto.codigo,
         cantidad: item.cantidad
       })
+      this.detalles = [];
+      this.dataSource.data = [];
+
     })
     console.log(this.parteCabecera)
 
+
     this.recojoServicio.guardarRegistro(this.parteCabecera)
       .subscribe(response => {
-        console.log(response)
+        console.log(response);
+        Swal.fire({
+          title: "SE GUARDO CORRECTAMENTE!",
+          icon: 'success'
+        })
+        this.parteCabecera = {
+          fecha: new Date(),
+          detalles: []
+        }
       }, err => {
         console.log(err)
       })
+
+
 
   }
 
