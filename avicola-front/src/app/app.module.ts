@@ -13,16 +13,19 @@ import {MatTableModule} from '@angular/material/table';
 
 
 import { RegistroComponent } from './registro/registro.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
+import { LoginComponent } from './login/login.component';
+import {ErrorAuthInterceptorService} from "./servicios/error-auth-interceptor.service";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegistroComponent
+    RegistroComponent,
+    LoginComponent
   ],
     imports: [
         BrowserModule,
@@ -39,7 +42,9 @@ import {MatIconModule} from "@angular/material/icon";
         MatIconModule
 
     ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorAuthInterceptorService, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

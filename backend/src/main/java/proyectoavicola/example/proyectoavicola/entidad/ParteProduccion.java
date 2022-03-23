@@ -36,6 +36,9 @@ public class ParteProduccion {
     @Column(name = "unimed_cod")
     private String unimedCod;
 
+    @Column(name = "unimed_equiv")
+    private String unimeEquiv;
+
     @Column(name = "parprod_stock")
     private BigDecimal stock;
 
@@ -112,5 +115,13 @@ public class ParteProduccion {
 
     public void setProdCod(String prodCod) {
         this.prodCod = prodCod;
+    }
+
+    public String getUnimeEquiv() {
+        return unimeEquiv;
+    }
+
+    public void setUnimeEquiv(String unimeEquiv) {
+        this.unimeEquiv = unimeEquiv;
     }
 }

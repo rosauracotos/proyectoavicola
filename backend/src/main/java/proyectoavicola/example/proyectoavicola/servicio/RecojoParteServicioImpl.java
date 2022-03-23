@@ -75,6 +75,7 @@ public class RecojoParteServicioImpl  implements RecojoParteServicio{
             //VALORES POR DEFECTO
             parteProduccion.setCantEquiv(recojoDetalleDTO.getCantidad());
             parteProduccion.setUnimedCod("01");
+            parteProduccion.setUnimeEquiv("01");
             parteProduccion.setParprodItem(AvicolaUtil.completarNumeroConCeros(3, orden));
             parteProduccion.setParprodCant(recojoDetalleDTO.getCantidad());
             parteProduccion.setProdCod(recojoDetalleDTO.getCodProducto());
